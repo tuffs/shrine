@@ -15,6 +15,8 @@ const GridBlock = CompLibrary.GridBlock;
 
 const fs = require('fs');
 
+const readFile = (name) => fs.readFileSync(`${process.cwd()}/${name}`, 'utf-8')
+
 class HomeSplash extends React.Component {
   render() {
     const {siteConfig} = this.props;
@@ -79,14 +81,12 @@ class Index extends React.Component {
     const {baseUrl} = siteConfig;
 
     const Demo = () => {
-      const content = fs.readFileSync(`${process.cwd()}/demo.md`, 'utf8');
+      const content = readFile("demo.md")
 
       return (
-        <div className="landingDemo">
-          <Container>
-            <MarkdownBlock>{content}</MarkdownBlock>
-          </Container>
-        </div>
+        <Container background="light" className="demoContainer">
+          <MarkdownBlock>{content}</MarkdownBlock>
+        </Container>
       )
     };
 
@@ -98,12 +98,32 @@ class Index extends React.Component {
       </div>
     )
 
+    const Sponsors = () => {
+      const sponsors = JSON.parse(readFile("sponsors.json"))
+
+      return (
+        <Container className="sponsorsContainer">
+          <h2>
+            <a href="https://github.com/sponsors/janko" target="_blank">Sponsors</a>
+            &nbsp;&nbsp;
+            <img src="https://github.githubassets.com/images/icons/emoji/unicode/1f496.png" height="20" />
+          </h2>
+          { sponsors.forEach(sponsor => {
+            <figure>
+              <img src={sponsor.avatar} height="200" alt={`${sponsor.name} avatar`} />
+            </figure>
+          }) }
+        </Container>
+      )
+    }
+
     return (
       <div>
         <HomeSplash siteConfig={siteConfig} language={language} />
         <Ads />
         <div className="mainContainer">
           <Demo />
+          <Sponsors />
         </div>
       </div>
     );

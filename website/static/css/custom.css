@@ -43,7 +43,13 @@
 }
 
 /* make demo code narrower */
-.landingDemo .wrapper {
+.demoContainer .wrapper {
+  max-width: 800px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.sponsorsContainer .wrapper {
   max-width: 800px;
 }
 
