@@ -1,6 +1,4 @@
----
-title: Testing with Shrine
----
+# Testing with Shrine
 
 The goal of this guide is to provide some useful tips for testing file
 attachments implemented with Shrine in your application.
